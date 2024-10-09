@@ -1,0 +1,9 @@
+{
+	"name": "Movierec1",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "a23f01ad-823f-4a5b-b4c1-dbf320d0f2cc",
+		"tenantId": "97debd4f-fa35-435f-a7f2-5d1e21fb7498"
+	}
+}
