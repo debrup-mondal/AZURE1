@@ -48,7 +48,9 @@
 						"referenceName": "Movie_Schema_Data",
 						"type": "DatasetReference"
 					},
-					"fieldList": [],
+					"fieldList": [
+						"structure"
+					],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
 						"enablePartitionDiscovery": false
