@@ -1,6 +1,21 @@
 {
 	"name": "Movie_recommendation_ppl",
 	"properties": {
+		"activities": [
+			{
+				"name": "Movie File",
+				"type": "GetMetadata",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": []
+			}
+		],
 		"annotations": []
 	}
 }
