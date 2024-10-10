@@ -75,6 +75,12 @@
 						"dependencyConditions": [
 							"Succeeded"
 						]
+					},
+					{
+						"activity": "CHECK MATCH STATUS",
+						"dependencyConditions": [
+							"Succeeded"
+						]
 					}
 				],
 				"userProperties": [],
@@ -96,7 +102,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"variableName": "CHECK MATCH STATUS",
-					"value": ""
+					"value": "NOT MATCHING"
 				}
 			}
 		],
