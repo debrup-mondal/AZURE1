@@ -82,16 +82,26 @@
 					"expression": {
 						"value": "@equals(activity('Movie File').output.structure,activity('Movie Schema').output.structure)",
 						"type": "Expression"
-					}
+					},
+					"ifTrueActivities": [
+						{
+							"name": "Set variable1",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": []
+						}
+					]
 				}
 			}
 		],
 		"variables": {
-			"MATCHING": {
-				"type": "Array"
-			},
 			"CHECK MATCH STATUS": {
-				"type": "String"
+				"type": "String",
+				"defaultValue": "NOT MATCHING"
 			}
 		},
 		"annotations": []
