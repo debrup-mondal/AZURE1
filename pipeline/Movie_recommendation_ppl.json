@@ -193,7 +193,21 @@
 								"secureOutput": false,
 								"secureInput": false
 							},
-							"userProperties": []
+							"userProperties": [],
+							"typeProperties": {
+								"dataset": {
+									"referenceName": "Raw_Data_Input_dataset",
+									"type": "DatasetReference"
+								},
+								"fieldList": [],
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							}
 						}
 					]
 				}
