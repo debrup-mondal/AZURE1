@@ -93,12 +93,18 @@
 						"dependencyConditions": [
 							"Succeeded"
 						]
+					},
+					{
+						"activity": "Tags Schema",
+						"dependencyConditions": [
+							"Succeeded"
+						]
 					}
 				],
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@and(\n    equals(activity('Movie File').output.structure, activity('Movie Schema').output.structure),\n    equals(activity('Ratings File').output.structure, activity('Ratings Schema').output.structure)\n)\n",
+						"value": "@and(\n    equals(activity('Movie File').output.structure, activity('Movie Schema').output.structure),\n    equals(activity('Ratings File').output.structure, activity('Ratings Schema').output.structure),\n    equals(activity('Tags File').output.structure, activity('Tags Schema').output.structure)\n)\n",
 						"type": "Expression"
 					},
 					"ifFalseActivities": [
@@ -235,7 +241,7 @@
 				}
 			},
 			{
-				"name": "Tags File_copy1",
+				"name": "Tags Schema",
 				"type": "GetMetadata",
 				"dependsOn": [],
 				"policy": {
