@@ -61,7 +61,7 @@
 				}
 			},
 			{
-				"name": "If Condition1",
+				"name": "If Schema Matches",
 				"type": "IfCondition",
 				"dependsOn": [
 					{
