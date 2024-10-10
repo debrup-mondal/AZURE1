@@ -199,7 +199,9 @@
 									"referenceName": "Raw_Data_Input_dataset",
 									"type": "DatasetReference"
 								},
-								"fieldList": [],
+								"fieldList": [
+									"childItems"
+								],
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
 									"enablePartitionDiscovery": false
