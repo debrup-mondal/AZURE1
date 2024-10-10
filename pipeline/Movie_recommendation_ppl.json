@@ -77,7 +77,13 @@
 						]
 					}
 				],
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@equals(activity('Movie File').output.structure,activity('Movie Schema').output.structure)",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"annotations": []
