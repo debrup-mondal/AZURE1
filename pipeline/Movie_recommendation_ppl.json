@@ -130,7 +130,9 @@
 						"referenceName": "RatingsData",
 						"type": "DatasetReference"
 					},
-					"fieldList": [],
+					"fieldList": [
+						"structure"
+					],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
 						"enablePartitionDiscovery": false
