@@ -117,6 +117,23 @@
 								"message": "SCHEMA NOT MATCHING",
 								"errorCode": "2.2"
 							}
+						},
+						{
+							"name": "Set variable1",
+							"type": "SetVariable",
+							"dependsOn": [
+								{
+									"activity": "Fail1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": []
 						}
 					],
 					"ifTrueActivities": [
