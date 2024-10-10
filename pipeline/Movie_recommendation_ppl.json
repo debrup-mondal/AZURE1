@@ -242,7 +242,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "TagsData",
+						"referenceName": "Tags_Schema_Data",
 						"type": "DatasetReference"
 					},
 					"fieldList": [
