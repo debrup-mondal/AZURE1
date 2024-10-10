@@ -183,7 +183,7 @@
 							]
 						},
 						{
-							"name": "Get Metadata1",
+							"name": "Get File Names",
 							"type": "GetMetadata",
 							"dependsOn": [],
 							"policy": {
