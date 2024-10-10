@@ -75,6 +75,18 @@
 						"dependencyConditions": [
 							"Succeeded"
 						]
+					},
+					{
+						"activity": "Ratings File",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Ratings Schema",
+						"dependencyConditions": [
+							"Succeeded"
+						]
 					}
 				],
 				"userProperties": [],
