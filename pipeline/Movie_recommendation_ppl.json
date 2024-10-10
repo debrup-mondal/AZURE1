@@ -92,7 +92,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@equals(activity('Movie File').output.structure,activity('Movie Schema').output.structure)",
+						"value": "@and(\n    equals(activity('Movie File').output.structure, activity('Movie Schema').output.structure),\n    equals(activity('Ratings File').output.structure, activity('Ratings Schema').output.structure)\n)\n",
 						"type": "Expression"
 					},
 					"ifFalseActivities": [
