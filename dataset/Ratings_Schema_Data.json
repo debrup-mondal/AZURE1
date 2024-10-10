@@ -1,0 +1,41 @@
+{
+	"name": "Ratings_Schema_Data",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "RATINGS_SCHEMA.csv",
+				"folderPath": "SCHEMA",
+				"container": "refschema"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "userId",
+				"type": "String"
+			},
+			{
+				"name": "movieId",
+				"type": "String"
+			},
+			{
+				"name": "rating",
+				"type": "String"
+			},
+			{
+				"name": "timestamp",
+				"type": "String"
+			}
+		]
+	}
+}
