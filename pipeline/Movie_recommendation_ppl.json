@@ -86,19 +86,26 @@
 				}
 			},
 			{
-				"name": "CHE",
+				"name": "CHECK MATCH STATUS",
 				"type": "SetVariable",
 				"dependsOn": [],
 				"policy": {
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "CHECK MATCH STATUS",
+					"value": ""
+				}
 			}
 		],
 		"variables": {
 			"MATCHING": {
 				"type": "Array"
+			},
+			"CHECK MATCH STATUS": {
+				"type": "String"
 			}
 		},
 		"annotations": []
