@@ -123,7 +123,7 @@
 							}
 						},
 						{
-							"name": "Copy data1",
+							"name": "Sucessful File copy",
 							"type": "Copy",
 							"dependsOn": [],
 							"policy": {
