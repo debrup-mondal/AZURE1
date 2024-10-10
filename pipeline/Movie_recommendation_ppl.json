@@ -82,7 +82,23 @@
 					"expression": {
 						"value": "@equals(activity('Movie File').output.structure,activity('Movie Schema').output.structure)",
 						"type": "Expression"
-					}
+					},
+					"ifTrueActivities": [
+						{
+							"name": "Set variable1",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "",
+								"value": ""
+							}
+						}
+					]
 				}
 			}
 		],
