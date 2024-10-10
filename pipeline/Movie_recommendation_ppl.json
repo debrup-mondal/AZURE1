@@ -85,7 +85,7 @@
 					},
 					"ifTrueActivities": [
 						{
-							"name": "SCHEMA IS MATCHING",
+							"name": "SCHEMA CHECK",
 							"type": "AppendVariable",
 							"dependsOn": [],
 							"userProperties": []
