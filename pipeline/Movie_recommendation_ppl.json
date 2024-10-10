@@ -90,7 +90,7 @@
 							"dependsOn": [],
 							"userProperties": [],
 							"typeProperties": {
-								"message": "",
+								"message": "SCHEMA NOT MATCHING",
 								"errorCode": "2.2"
 							}
 						}
