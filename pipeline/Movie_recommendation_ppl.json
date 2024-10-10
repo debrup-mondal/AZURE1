@@ -75,12 +75,6 @@
 						"dependencyConditions": [
 							"Succeeded"
 						]
-					},
-					{
-						"activity": "CHECK MATCH STATUS",
-						"dependencyConditions": [
-							"Succeeded"
-						]
 					}
 				],
 				"userProperties": [],
@@ -89,20 +83,6 @@
 						"value": "@equals(activity('Movie File').output.structure,activity('Movie Schema').output.structure)",
 						"type": "Expression"
 					}
-				}
-			},
-			{
-				"name": "CHECK MATCH STATUS",
-				"type": "SetVariable",
-				"dependsOn": [],
-				"policy": {
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "CHECK MATCH STATUS",
-					"value": "NOT MATCHING"
 				}
 			}
 		],
