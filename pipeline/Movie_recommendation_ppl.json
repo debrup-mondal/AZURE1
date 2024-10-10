@@ -86,7 +86,7 @@
 				}
 			},
 			{
-				"name": "Set variable1",
+				"name": "CHE",
 				"type": "SetVariable",
 				"dependsOn": [],
 				"policy": {
