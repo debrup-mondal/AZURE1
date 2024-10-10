@@ -88,7 +88,11 @@
 							"name": "Fail1",
 							"type": "Fail",
 							"dependsOn": [],
-							"userProperties": []
+							"userProperties": [],
+							"typeProperties": {
+								"message": "",
+								"errorCode": "2.2"
+							}
 						}
 					],
 					"ifTrueActivities": [
