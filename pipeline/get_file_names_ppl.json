@@ -15,7 +15,18 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"fieldList": []
+					"dataset": {
+						"referenceName": "input_file_names",
+						"type": "DatasetReference"
+					},
+					"fieldList": [],
+					"storeSettings": {
+						"type": "AzureBlobStorageReadSettings",
+						"enablePartitionDiscovery": false
+					},
+					"formatSettings": {
+						"type": "DelimitedTextReadSettings"
+					}
 				}
 			}
 		],
