@@ -62,7 +62,7 @@
 					"isSequential": true,
 					"activities": [
 						{
-							"name": "Set variable1",
+							"name": "filename",
 							"type": "SetVariable",
 							"dependsOn": [],
 							"policy": {
@@ -79,35 +79,11 @@
 							}
 						},
 						{
-							"name": "Set variable2",
-							"type": "SetVariable",
-							"dependsOn": [
-								{
-									"activity": "Set variable1",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
-							"policy": {
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"variableName": "char_length",
-								"value": {
-									"value": "@length(variables('name'))",
-									"type": "Expression"
-								}
-							}
-						},
-						{
 							"name": "schema file name",
 							"type": "SetVariable",
 							"dependsOn": [
 								{
-									"activity": "Set variable2",
+									"activity": "filename",
 									"dependencyConditions": [
 										"Succeeded"
 									]
