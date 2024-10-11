@@ -357,9 +357,16 @@
 										]
 									},
 									{
-										"name": "Notebook1",
+										"name": "MovieML",
 										"type": "DatabricksNotebook",
-										"dependsOn": [],
+										"dependsOn": [
+											{
+												"activity": "Copy matched files",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
 										"policy": {
 											"timeout": "0.12:00:00",
 											"retry": 0,
