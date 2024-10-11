@@ -115,7 +115,7 @@
 			"name": {
 				"type": "String"
 			},
-			"name_val": {
+			"schema_name": {
 				"type": "String"
 			}
 		},
