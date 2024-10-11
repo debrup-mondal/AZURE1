@@ -108,7 +108,34 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"fileListPath": "rawdata/Movie",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"dataset": {
+						"referenceName": "input_file_names",
+						"type": "DatasetReference",
+						"parameters": {
+							"container_name": {
+								"value": "@variables('container_name')",
+								"type": "Expression"
+							},
+							"folder_name": {
+								"value": "@variables('folder_name')",
+								"type": "Expression"
+							}
+						}
+					}
+				}
 			}
 		],
 		"variables": {
