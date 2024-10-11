@@ -86,9 +86,10 @@
 							"userProperties": [],
 							"typeProperties": {
 								"variableName": "append",
-								"value": [
-									""
-								]
+								"value": {
+									"value": "@item()",
+									"type": "Expression"
+								}
 							}
 						}
 					]
