@@ -1,6 +1,21 @@
 {
 	"name": "get_file_names_ppl",
 	"properties": {
+		"activities": [
+			{
+				"name": "check file names",
+				"type": "GetMetadata",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": []
+			}
+		],
 		"parameters": {
 			"container_name": {
 				"type": "string"
