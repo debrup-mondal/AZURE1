@@ -145,7 +145,6 @@
 								],
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
-									"recursive": true,
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
@@ -196,7 +195,6 @@
 								],
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
-									"recursive": true,
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
@@ -291,27 +289,6 @@
 												"type": "DatasetReference"
 											}
 										]
-									},
-									{
-										"name": "match status false",
-										"type": "SetVariable",
-										"dependsOn": [
-											{
-												"activity": "Copy unmatched files",
-												"dependencyConditions": [
-													"Succeeded"
-												]
-											}
-										],
-										"policy": {
-											"secureOutput": false,
-											"secureInput": false
-										},
-										"userProperties": [],
-										"typeProperties": {
-											"variableName": "match_status",
-											"value": ""
-										}
 									}
 								],
 								"ifTrueActivities": [
@@ -445,7 +422,8 @@
 				"defaultValue": "SCHEMA"
 			},
 			"match_status": {
-				"type": "Boolean"
+				"type": "Boolean",
+				"defaultValue": "True"
 			}
 		},
 		"annotations": []
