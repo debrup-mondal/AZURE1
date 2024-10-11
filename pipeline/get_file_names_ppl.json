@@ -62,7 +62,7 @@
 					"isSequential": true,
 					"activities": [
 						{
-							"name": "Set variable2",
+							"name": "Set variable1",
 							"type": "SetVariable",
 							"dependsOn": [],
 							"policy": {
@@ -72,34 +72,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"variableName": "name",
-								"value": {
-									"value": "@item().name",
-									"type": "Expression"
-								}
-							}
-						},
-						{
-							"name": "Set variable3",
-							"type": "SetVariable",
-							"dependsOn": [
-								{
-									"activity": "Set variable2",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
-							"policy": {
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"variableName": "name_val",
-								"value": {
-									"value": "@variables('name').value",
-									"type": "Expression"
-								}
+								"value": ""
 							}
 						}
 					]
