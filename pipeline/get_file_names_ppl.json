@@ -43,7 +43,7 @@
 				}
 			},
 			{
-				"name": "ForEach1",
+				"name": "schema file name",
 				"type": "ForEach",
 				"dependsOn": [
 					{
@@ -101,6 +101,23 @@
 									"type": "Expression"
 								}
 							}
+						},
+						{
+							"name": "Set variable3",
+							"type": "SetVariable",
+							"dependsOn": [
+								{
+									"activity": "Set variable2",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": []
 						}
 					]
 				}
