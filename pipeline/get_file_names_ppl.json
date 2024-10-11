@@ -70,11 +70,15 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
-								"variableName": "name",
-								"value": {
-									"value": "@item().name",
-									"type": "Expression"
-								}
+								"variableName": "pipelineReturnValue",
+								"value": [
+									{
+										"value": {
+											"type": "String"
+										}
+									}
+								],
+								"setSystemVariable": true
 							}
 						}
 					]
