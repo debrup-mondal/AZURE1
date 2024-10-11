@@ -19,7 +19,13 @@
 				"typeProperties": {
 					"dataset": {
 						"referenceName": "input_file_names",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"container_name": {
+								"value": "@variables('x')",
+								"type": "Expression"
+							}
+						}
 					},
 					"fieldList": [
 						"childItems"
