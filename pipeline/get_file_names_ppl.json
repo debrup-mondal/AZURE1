@@ -45,7 +45,7 @@
 			},
 			"folder_name": {
 				"type": "String",
-				"defaultValue": "M"
+				"defaultValue": "Movie"
 			}
 		},
 		"annotations": []
