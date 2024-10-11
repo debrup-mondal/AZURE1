@@ -203,6 +203,12 @@
 			},
 			"schema_filename": {
 				"type": "String"
+			},
+			"schema_container_name": {
+				"type": "String"
+			},
+			"schema_": {
+				"type": "String"
 			}
 		},
 		"annotations": []
