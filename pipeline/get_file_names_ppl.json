@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "check file names",
+				"name": "get file names",
 				"type": "GetMetadata",
 				"dependsOn": [],
 				"policy": {
