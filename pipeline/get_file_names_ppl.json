@@ -30,12 +30,22 @@
 						"type": "DelimitedTextReadSettings"
 					}
 				}
+			},
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": []
 			}
 		],
 		"parameters": {
 			"container_name": {
 				"type": "string",
-				"defaultValue": "@"
+				"defaultValue": "@x"
 			}
 		},
 		"variables": {
