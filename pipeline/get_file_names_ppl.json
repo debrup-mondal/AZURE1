@@ -225,6 +225,24 @@
 									"value": "@equals(activity('input file structure').output.structure, activity('schema file structure').output.structure)",
 									"type": "Expression"
 								},
+								"ifFalseActivities": [
+									{
+										"name": "Copy unmatched ",
+										"type": "Copy",
+										"dependsOn": [],
+										"policy": {
+											"timeout": "0.12:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"enableStaging": false
+										}
+									}
+								],
 								"ifTrueActivities": [
 									{
 										"name": "Copy matched files",
