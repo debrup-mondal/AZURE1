@@ -95,11 +95,8 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
-								"variableName": "name",
-								"value": {
-									"value": "@variables('name').value",
-									"type": "Expression"
-								}
+								"variableName": "name_val",
+								"value": ""
 							}
 						}
 					]
@@ -116,6 +113,9 @@
 				"defaultValue": "Movie"
 			},
 			"name": {
+				"type": "String"
+			},
+			"name_val": {
 				"type": "String"
 			}
 		},
