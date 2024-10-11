@@ -413,8 +413,8 @@
 				}
 			},
 			{
-				"name": "Set variable1",
-				"type": "SetVariable",
+				"name": "If Condition1",
+				"type": "IfCondition",
 				"dependsOn": [
 					{
 						"activity": "input file name",
@@ -423,22 +423,7 @@
 						]
 					}
 				],
-				"policy": {
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "pipelineReturnValue",
-					"value": [
-						{
-							"value": {
-								"type": "String"
-							}
-						}
-					],
-					"setSystemVariable": true
-				}
+				"userProperties": []
 			}
 		],
 		"variables": {
