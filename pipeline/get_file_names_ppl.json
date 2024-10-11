@@ -185,7 +185,7 @@
 											"type": "Expression"
 										},
 										"container": {
-											"value": "@variables('container_name')",
+											"value": "@variables('schema_container_name')",
 											"type": "Expression"
 										}
 									}
