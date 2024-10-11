@@ -63,6 +63,8 @@
 						{
 							"name": "Set variable1",
 							"type": "SetVariable",
+							"state": "Inactive",
+							"onInactiveMarkAs": "Succeeded",
 							"dependsOn": [],
 							"policy": {
 								"secureOutput": false,
@@ -76,6 +78,12 @@
 									"type": "Expression"
 								}
 							}
+						},
+						{
+							"name": "Append variable1",
+							"type": "AppendVariable",
+							"dependsOn": [],
+							"userProperties": []
 						}
 					]
 				}
