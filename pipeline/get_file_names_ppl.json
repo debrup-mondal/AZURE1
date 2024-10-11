@@ -93,47 +93,6 @@
 									"type": "Expression"
 								}
 							}
-						},
-						{
-							"name": "Lookup1",
-							"type": "Lookup",
-							"dependsOn": [],
-							"policy": {
-								"timeout": "0.12:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"source": {
-									"type": "DelimitedTextSource",
-									"storeSettings": {
-										"type": "AzureBlobStorageReadSettings",
-										"fileListPath": "rawdata/Movie",
-										"enablePartitionDiscovery": false
-									},
-									"formatSettings": {
-										"type": "DelimitedTextReadSettings"
-									}
-								},
-								"dataset": {
-									"referenceName": "input_file_names",
-									"type": "DatasetReference",
-									"parameters": {
-										"container_name": {
-											"value": "@variables('container_name')",
-											"type": "Expression"
-										},
-										"folder_name": {
-											"value": "@variables('folder_name')",
-											"type": "Expression"
-										}
-									}
-								},
-								"firstRowOnly": false
-							}
 						}
 					]
 				}
