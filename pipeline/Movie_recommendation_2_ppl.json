@@ -291,7 +291,7 @@
 										]
 									},
 									{
-										"name": "match sta",
+										"name": "match status false",
 										"type": "SetVariable",
 										"dependsOn": [
 											{
@@ -305,7 +305,11 @@
 											"secureOutput": false,
 											"secureInput": false
 										},
-										"userProperties": []
+										"userProperties": [],
+										"typeProperties": {
+											"variableName": "match_status",
+											"value": ""
+										}
 									}
 								],
 								"ifTrueActivities": [
