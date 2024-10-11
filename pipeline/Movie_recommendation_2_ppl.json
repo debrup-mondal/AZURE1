@@ -423,7 +423,13 @@
 						]
 					}
 				],
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@equals(variables('match_status'), true)",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"variables": {
