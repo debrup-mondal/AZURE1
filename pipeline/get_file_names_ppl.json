@@ -111,7 +111,7 @@
 									"type": "DelimitedTextSource",
 									"storeSettings": {
 										"type": "AzureBlobStorageReadSettings",
-										"recursive": true,
+										"fileListPath": "rawdata/Movie",
 										"enablePartitionDiscovery": false
 									},
 									"formatSettings": {
