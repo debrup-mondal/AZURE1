@@ -87,7 +87,7 @@
 							"typeProperties": {
 								"variableName": "append",
 								"value": {
-									"value": "@item()",
+									"value": "@{item().name}",
 									"type": "Expression"
 								}
 							}
