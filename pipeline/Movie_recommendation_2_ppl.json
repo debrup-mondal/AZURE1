@@ -289,6 +289,23 @@
 												"type": "DatasetReference"
 											}
 										]
+									},
+									{
+										"name": "Set variable1",
+										"type": "SetVariable",
+										"dependsOn": [
+											{
+												"activity": "Copy unmatched files",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"policy": {
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": []
 									}
 								],
 								"ifTrueActivities": [
@@ -423,7 +440,7 @@
 			},
 			"match_status": {
 				"type": "Boolean",
-				"defaultValue": "True"
+				"defaultValue": true
 			}
 		},
 		"annotations": []
