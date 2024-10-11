@@ -119,7 +119,9 @@
 									"referenceName": "input_file_structure_dataset",
 									"type": "DatasetReference"
 								},
-								"fieldList": [],
+								"fieldList": [
+									"childItems"
+								],
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
 									"enablePartitionDiscovery": false
