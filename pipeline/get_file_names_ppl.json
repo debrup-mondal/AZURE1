@@ -83,7 +83,14 @@
 							"name": "Append variable1",
 							"type": "AppendVariable",
 							"dependsOn": [],
-							"userProperties": []
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "append",
+								"value": {
+									"value": "@item()",
+									"type": "Expression"
+								}
+							}
 						}
 					]
 				}
@@ -100,6 +107,9 @@
 			},
 			"filename": {
 				"type": "String"
+			},
+			"append": {
+				"type": "Array"
 			}
 		},
 		"annotations": []
