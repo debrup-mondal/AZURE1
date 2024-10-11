@@ -43,7 +43,7 @@
 				}
 			},
 			{
-				"name": "schema file name",
+				"name": "input file name",
 				"type": "ForEach",
 				"dependsOn": [
 					{
@@ -103,7 +103,7 @@
 							}
 						},
 						{
-							"name": "Set variable3",
+							"name": "schema file name",
 							"type": "SetVariable",
 							"dependsOn": [
 								{
