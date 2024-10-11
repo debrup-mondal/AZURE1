@@ -97,7 +97,7 @@
 							"typeProperties": {
 								"variableName": "schema_name",
 								"value": {
-									"value": "@concat(variables('name'),'_schema')",
+									"value": "@length(variables('name'))",
 									"type": "Expression"
 								}
 							}
