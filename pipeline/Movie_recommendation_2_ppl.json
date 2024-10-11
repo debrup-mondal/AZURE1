@@ -145,6 +145,7 @@
 								],
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
@@ -195,6 +196,7 @@
 								],
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
@@ -308,7 +310,7 @@
 										"userProperties": [],
 										"typeProperties": {
 											"variableName": "match_status",
-											"value": false
+											"value": ""
 										}
 									}
 								],
@@ -443,8 +445,7 @@
 				"defaultValue": "SCHEMA"
 			},
 			"match_status": {
-				"type": "Boolean",
-				"defaultValue": "True"
+				"type": "Boolean"
 			}
 		},
 		"annotations": []
