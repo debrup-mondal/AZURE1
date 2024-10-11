@@ -289,6 +289,23 @@
 												"type": "DatasetReference"
 											}
 										]
+									},
+									{
+										"name": "match sta",
+										"type": "SetVariable",
+										"dependsOn": [
+											{
+												"activity": "Copy unmatched files",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"policy": {
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": []
 									}
 								],
 								"ifTrueActivities": [
