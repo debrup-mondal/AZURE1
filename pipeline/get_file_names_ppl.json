@@ -68,17 +68,12 @@
 								"secureOutput": false,
 								"secureInput": false
 							},
-							"userProperties": [],
 							"typeProperties": {
-								"variableName": "pipelineReturnValue",
-								"value": [
-									{
-										"value": {
-											"type": "String"
-										}
-									}
-								],
-								"setSystemVariable": true
+								"variableName": "name",
+								"value": {
+									"value": "@item().name",
+									"type": "Expression"
+								}
 							}
 						}
 					]
