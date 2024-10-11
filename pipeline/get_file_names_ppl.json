@@ -133,6 +133,10 @@
 										"directory": {
 											"value": "@variables('folder_name')",
 											"type": "Expression"
+										},
+										"container": {
+											"value": "@variables('container_name')",
+											"type": "Expression"
 										}
 									}
 								},
