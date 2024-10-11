@@ -1,0 +1,14 @@
+{
+	"name": "get_file_names_ppl",
+	"properties": {
+		"parameters": {
+			"container_name": {
+				"type": "string"
+			},
+			"folder_name": {
+				"type": "string"
+			}
+		},
+		"annotations": []
+	}
+}
