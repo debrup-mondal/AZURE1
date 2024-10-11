@@ -95,7 +95,7 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
-								"variableName": "schema_name",
+								"variableName": "char_length",
 								"value": {
 									"value": "@length(variables('name'))",
 									"type": "Expression"
@@ -120,6 +120,9 @@
 			},
 			"schema_name": {
 				"type": "String"
+			},
+			"char_length": {
+				"type": "Integer"
 			}
 		},
 		"annotations": []
