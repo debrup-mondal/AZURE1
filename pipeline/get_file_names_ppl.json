@@ -96,7 +96,10 @@
 							"userProperties": [],
 							"typeProperties": {
 								"variableName": "name_val",
-								"value": ""
+								"value": {
+									"value": "@variables('name')",
+									"type": "Expression"
+								}
 							}
 						}
 					]
