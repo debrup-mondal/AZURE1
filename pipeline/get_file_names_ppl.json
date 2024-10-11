@@ -42,9 +42,6 @@
 			"container_name": {
 				"type": "String",
 				"defaultValue": "rawdata"
-			},
-			"y": {
-				"type": "String"
 			}
 		},
 		"annotations": []
