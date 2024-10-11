@@ -422,7 +422,8 @@
 				"defaultValue": "SCHEMA"
 			},
 			"match_status": {
-				"type": "String"
+				"type": "Boolean",
+				"defaultValue": "True"
 			}
 		},
 		"annotations": []
