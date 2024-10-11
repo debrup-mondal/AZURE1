@@ -227,7 +227,7 @@
 								},
 								"ifFalseActivities": [
 									{
-										"name": "Copy unmatched ",
+										"name": "Copy unmatched files",
 										"type": "Copy",
 										"dependsOn": [],
 										"policy": {
@@ -239,8 +239,25 @@
 										},
 										"userProperties": [],
 										"typeProperties": {
+											"source": {
+												"type": "DelimitedTextSource",
+												"storeSettings": {
+													"type": "AzureBlobStorageReadSettings",
+													"recursive": true,
+													"enablePartitionDiscovery": false
+												},
+												"formatSettings": {
+													"type": "DelimitedTextReadSettings"
+												}
+											},
 											"enableStaging": false
-										}
+										},
+										"inputs": [
+											{
+												"referenceName": "unmatched_source_files_dataset",
+												"type": "DatasetReference"
+											}
+										]
 									}
 								],
 								"ifTrueActivities": [
