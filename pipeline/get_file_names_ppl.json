@@ -103,7 +103,7 @@
 							}
 						},
 						{
-							"name": "filename structure",
+							"name": "input file structure",
 							"type": "GetMetadata",
 							"dependsOn": [],
 							"policy": {
