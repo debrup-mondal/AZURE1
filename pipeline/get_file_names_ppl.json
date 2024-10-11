@@ -205,10 +205,12 @@
 				"type": "String"
 			},
 			"schema_container_name": {
-				"type": "String"
+				"type": "String",
+				"defaultValue": "refschema"
 			},
-			"schema_": {
-				"type": "String"
+			"schema_folder_name": {
+				"type": "String",
+				"defaultValue": "SCHEMA"
 			}
 		},
 		"annotations": []
