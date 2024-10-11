@@ -5,8 +5,6 @@
 			{
 				"name": "get file names",
 				"type": "GetMetadata",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -38,30 +36,8 @@
 						"type": "DelimitedTextReadSettings"
 					}
 				}
-			},
-			{
-				"name": "Set variable1",
-				"type": "SetVariable",
-				"dependsOn": [],
-				"policy": {
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "y",
-					"value": {
-						"value": "@pipeline().parameters.container_name",
-						"type": "Expression"
-					}
-				}
 			}
 		],
-		"parameters": {
-			"container_name": {
-				"type": "string"
-			}
-		},
 		"variables": {
 			"x": {
 				"type": "String",
