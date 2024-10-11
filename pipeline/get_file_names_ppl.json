@@ -93,7 +93,11 @@
 								"secureOutput": false,
 								"secureInput": false
 							},
-							"userProperties": []
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "name_val",
+								"value": ""
+							}
 						}
 					]
 				}
@@ -115,6 +119,9 @@
 				"type": "Array"
 			},
 			"name": {
+				"type": "String"
+			},
+			"name_val": {
 				"type": "String"
 			}
 		},
