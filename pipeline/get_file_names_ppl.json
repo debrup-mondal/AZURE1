@@ -54,7 +54,7 @@
 		"parameters": {
 			"container_name": {
 				"type": "string",
-				"defaultValue": "@x"
+				"defaultValue": "x"
 			}
 		},
 		"variables": {
