@@ -203,9 +203,22 @@
 							}
 						},
 						{
-							"name": "If Condition1",
+							"name": "schema match check",
 							"type": "IfCondition",
-							"dependsOn": [],
+							"dependsOn": [
+								{
+									"activity": "input file structure",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								},
+								{
+									"activity": "schema file structure",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
 							"userProperties": []
 						}
 					]
