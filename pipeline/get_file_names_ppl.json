@@ -274,7 +274,13 @@
 										"inputs": [
 											{
 												"referenceName": "matched_files_source_dataset",
-												"type": "DatasetReference"
+												"type": "DatasetReference",
+												"parameters": {
+													"filename": {
+														"value": "@variables('name')",
+														"type": "Expression"
+													}
+												}
 											}
 										],
 										"outputs": [
