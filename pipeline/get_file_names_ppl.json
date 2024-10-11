@@ -61,40 +61,6 @@
 					"isSequential": true,
 					"activities": [
 						{
-							"name": "Append variable1",
-							"type": "AppendVariable",
-							"state": "Inactive",
-							"onInactiveMarkAs": "Succeeded",
-							"dependsOn": [],
-							"userProperties": [],
-							"typeProperties": {
-								"variableName": "append",
-								"value": {
-									"value": "@item().name",
-									"type": "Expression"
-								}
-							}
-						},
-						{
-							"name": "Set variable1",
-							"type": "SetVariable",
-							"state": "Inactive",
-							"onInactiveMarkAs": "Succeeded",
-							"dependsOn": [],
-							"policy": {
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"variableName": "append",
-								"value": {
-									"value": "@{item().name}",
-									"type": "Expression"
-								}
-							}
-						},
-						{
 							"name": "Set variable2",
 							"type": "SetVariable",
 							"dependsOn": [],
