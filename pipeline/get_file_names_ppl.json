@@ -124,7 +124,17 @@
 							"typeProperties": {
 								"dataset": {
 									"referenceName": "input_file_structure_dataset",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"filename": {
+											"value": "@variables('name')",
+											"type": "Expression"
+										},
+										"directory": {
+											"value": "@variables('folder_name')",
+											"type": "Expression"
+										}
+									}
 								},
 								"fieldList": [
 									"structure"
