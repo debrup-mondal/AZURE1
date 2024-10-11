@@ -72,7 +72,7 @@
 							"typeProperties": {
 								"variableName": "filename",
 								"value": {
-									"value": "@activity('get file names').output.value",
+									"value": "@activity('get file names').output.childItems",
 									"type": "Expression"
 								}
 							}
