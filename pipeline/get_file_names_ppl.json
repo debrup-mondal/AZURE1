@@ -39,7 +39,14 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "y",
+					"value": {
+						"value": "@pipeline().parameters.container_name",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"parameters": {
@@ -52,6 +59,9 @@
 			"x": {
 				"type": "String",
 				"defaultValue": "rawdata"
+			},
+			"y": {
+				"type": "String"
 			}
 		},
 		"annotations": []
