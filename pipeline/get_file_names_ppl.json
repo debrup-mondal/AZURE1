@@ -17,13 +17,7 @@
 				"typeProperties": {
 					"dataset": {
 						"referenceName": "input_file_names",
-						"type": "DatasetReference",
-						"parameters": {
-							"container_name": {
-								"value": "@pipeline().parameters.container_name",
-								"type": "Expression"
-							}
-						}
+						"type": "DatasetReference"
 					},
 					"fieldList": [
 						"childItems"
