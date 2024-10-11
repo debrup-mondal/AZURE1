@@ -420,6 +420,9 @@
 			"schema_folder_name": {
 				"type": "String",
 				"defaultValue": "SCHEMA"
+			},
+			"match_status": {
+				"type": "String"
 			}
 		},
 		"annotations": []
