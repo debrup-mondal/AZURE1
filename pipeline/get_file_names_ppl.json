@@ -120,7 +120,10 @@
 							"userProperties": [],
 							"typeProperties": {
 								"variableName": "schema_filename",
-								"value": "@concat(substring(variables('name'), 0, length(variables('name')) - 4), '_schema.csv')\n"
+								"value": {
+									"value": "@concat(substring(variables('name'), 0, add(length(variables('name')), -4)), '_schema.csv')\n",
+									"type": "Expression"
+								}
 							}
 						}
 					]
