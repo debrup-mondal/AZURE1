@@ -32,10 +32,16 @@
 				}
 			}
 		],
+		"parameters": {
+			"container_name": {
+				"type": "string",
+				"defaultValue": "@"
+			}
+		},
 		"variables": {
 			"x": {
 				"type": "String",
-				"defaultValue": "raw"
+				"defaultValue": "rawdata"
 			}
 		},
 		"annotations": []
