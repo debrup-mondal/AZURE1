@@ -5,8 +5,6 @@
 			{
 				"name": "get file names",
 				"type": "GetMetadata",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -46,8 +44,6 @@
 			{
 				"name": "ForEach1",
 				"type": "ForEach",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "get file names",
@@ -104,6 +100,8 @@
 			{
 				"name": "Lookup1",
 				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -140,28 +138,6 @@
 						}
 					},
 					"firstRowOnly": false
-				}
-			},
-			{
-				"name": "ForEach2",
-				"type": "ForEach",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
-				"dependsOn": [
-					{
-						"activity": "Lookup1",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"items": {
-						"value": "@activity('Lookup1').output",
-						"type": "Expression"
-					},
-					"isSequential": true
 				}
 			}
 		],
