@@ -95,8 +95,11 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
-								"variableName": "",
-								"value": ""
+								"variableName": "schema_name",
+								"value": {
+									"value": "@concat(variables('name'),'_schema')",
+									"type": "Expression"
+								}
 							}
 						}
 					]
