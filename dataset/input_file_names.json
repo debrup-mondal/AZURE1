@@ -5,17 +5,13 @@
 			"referenceName": "ls1",
 			"type": "LinkedServiceReference"
 		},
-		"parameters": {
-			"container_name": {
-				"type": "string"
-			}
-		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"folderPath": "Movie"
+				"folderPath": "Movie",
+				"container": "rawdata"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",

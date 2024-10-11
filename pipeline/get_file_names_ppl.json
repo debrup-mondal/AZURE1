@@ -32,14 +32,6 @@
 				}
 			}
 		],
-		"parameters": {
-			"container_name": {
-				"type": "string"
-			},
-			"folder_name": {
-				"type": "string"
-			}
-		},
 		"annotations": []
 	}
 }
