@@ -359,6 +359,8 @@
 									{
 										"name": "MovieML",
 										"type": "DatabricksNotebook",
+										"state": "Inactive",
+										"onInactiveMarkAs": "Succeeded",
 										"dependsOn": [
 											{
 												"activity": "Copy matched files",
@@ -375,6 +377,9 @@
 											"secureInput": false
 										},
 										"userProperties": [],
+										"typeProperties": {
+											"notebookPath": "/Users/debrup617@gmail.com/test Notebook"
+										},
 										"linkedServiceName": {
 											"referenceName": "AzureDatabricks",
 											"type": "LinkedServiceReference"
