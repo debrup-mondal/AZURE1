@@ -179,6 +179,14 @@
 										"filename": {
 											"value": "@variables('schema_filename')",
 											"type": "Expression"
+										},
+										"directory": {
+											"value": "@variables('schema_folder_name')",
+											"type": "Expression"
+										},
+										"container": {
+											"value": "@variables('container_name')",
+											"type": "Expression"
 										}
 									}
 								},
