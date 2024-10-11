@@ -274,7 +274,13 @@
 										"inputs": [
 											{
 												"referenceName": "unmatched_source_files_dataset",
-												"type": "DatasetReference"
+												"type": "DatasetReference",
+												"parameters": {
+													"filename": {
+														"value": "@variables('name')",
+														"type": "Expression"
+													}
+												}
 											}
 										],
 										"outputs": [
