@@ -55,7 +55,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('get file names').output.childItems",
+						"value": "@activity('get file names').output",
 						"type": "Expression"
 					},
 					"isSequential": true,
@@ -73,21 +73,6 @@
 							"userProperties": [],
 							"typeProperties": {
 								"variableName": "filename",
-								"value": {
-									"value": "@item()",
-									"type": "Expression"
-								}
-							}
-						},
-						{
-							"name": "Append variable1",
-							"type": "AppendVariable",
-							"state": "Inactive",
-							"onInactiveMarkAs": "Succeeded",
-							"dependsOn": [],
-							"userProperties": [],
-							"typeProperties": {
-								"variableName": "append",
 								"value": {
 									"value": "@item()",
 									"type": "Expression"
