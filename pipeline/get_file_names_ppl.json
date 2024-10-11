@@ -91,6 +91,22 @@
 									"type": "Expression"
 								}
 							}
+						},
+						{
+							"name": "Set variable2",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "name",
+								"value": [
+									""
+								]
+							}
 						}
 					]
 				}
@@ -152,6 +168,9 @@
 				"type": "String"
 			},
 			"append": {
+				"type": "Array"
+			},
+			"name": {
 				"type": "Array"
 			}
 		},
