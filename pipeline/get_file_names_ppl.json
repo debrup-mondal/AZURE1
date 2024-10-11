@@ -34,6 +34,7 @@
 					],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
+						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
@@ -68,10 +69,11 @@
 								"secureOutput": false,
 								"secureInput": false
 							},
+							"userProperties": [],
 							"typeProperties": {
 								"variableName": "name",
 								"value": {
-									"value": "@item().name",
+									"value": "@item()",
 									"type": "Expression"
 								}
 							}
