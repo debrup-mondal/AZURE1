@@ -141,6 +141,22 @@
 					},
 					"firstRowOnly": false
 				}
+			},
+			{
+				"name": "ForEach2",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Lookup1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"isSequential": true
+				}
 			}
 		],
 		"variables": {
