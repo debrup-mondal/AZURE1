@@ -42,6 +42,10 @@
 			"container_name": {
 				"type": "String",
 				"defaultValue": "rawdata"
+			},
+			"folder_name": {
+				"type": "String",
+				"defaultValue": "M"
 			}
 		},
 		"annotations": []
