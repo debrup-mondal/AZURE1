@@ -219,7 +219,13 @@
 									]
 								}
 							],
-							"userProperties": []
+							"userProperties": [],
+							"typeProperties": {
+								"expression": {
+									"value": "@equals(activity('input file structure').output.structure, activity('schema file structure').output.structure)",
+									"type": "Expression"
+								}
+							}
 						}
 					]
 				}
