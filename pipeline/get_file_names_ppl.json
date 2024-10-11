@@ -174,7 +174,13 @@
 							"typeProperties": {
 								"dataset": {
 									"referenceName": "schema_file_structure_dataset",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"filename": {
+											"value": "@variables('schema_filename')",
+											"type": "Expression"
+										}
+									}
 								},
 								"fieldList": [],
 								"storeSettings": {
