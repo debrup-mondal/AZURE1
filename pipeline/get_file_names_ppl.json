@@ -55,7 +55,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('get file names').output.itemName",
+						"value": "@activity('get file names').output.childItems",
 						"type": "Expression"
 					},
 					"isSequential": true,
