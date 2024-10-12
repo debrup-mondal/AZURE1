@@ -376,35 +376,6 @@
 												"type": "DatasetReference"
 											}
 										]
-									},
-									{
-										"name": "MovieML",
-										"type": "DatabricksNotebook",
-										"state": "Inactive",
-										"onInactiveMarkAs": "Succeeded",
-										"dependsOn": [
-											{
-												"activity": "Copy matched files",
-												"dependencyConditions": [
-													"Succeeded"
-												]
-											}
-										],
-										"policy": {
-											"timeout": "0.12:00:00",
-											"retry": 0,
-											"retryIntervalInSeconds": 30,
-											"secureOutput": false,
-											"secureInput": false
-										},
-										"userProperties": [],
-										"typeProperties": {
-											"notebookPath": "/Users/debrup617@gmail.com/test Notebook"
-										},
-										"linkedServiceName": {
-											"referenceName": "AzureDatabricks",
-											"type": "LinkedServiceReference"
-										}
 									}
 								]
 							}
@@ -442,12 +413,23 @@
 					],
 					"ifTrueActivities": [
 						{
-							"name": "Wait1 for true",
-							"type": "Wait",
+							"name": "MovieML",
+							"type": "DatabricksNotebook",
 							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
 							"userProperties": [],
 							"typeProperties": {
-								"waitTimeInSeconds": 1
+								"notebookPath": "/Users/debrup617@gmail.com/test Notebook"
+							},
+							"linkedServiceName": {
+								"referenceName": "AzureDatabricks",
+								"type": "LinkedServiceReference"
 							}
 						}
 					]
