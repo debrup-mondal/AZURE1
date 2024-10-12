@@ -18,7 +18,7 @@
 						"Content-type": "application\\json"
 					},
 					"body": {
-						"value": "{\n    \"event\": \"test_event\",\n    \"timestamp\": \"2024-10-05T12:34:56Z\"\n}\n",
+						"value": "{\n    \"pipeline\": \"test_ppl\"\n}\n",
 						"type": "Expression"
 					},
 					"timeout": "00:10:00"
