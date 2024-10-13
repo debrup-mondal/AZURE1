@@ -472,7 +472,7 @@
 							"typeProperties": {
 								"variableName": "url from vault",
 								"value": {
-									"value": "@activity('logic app and vault connection').output.value",
+									"value": "@activity('logic app and vault connection_copy1_copy1').output.value",
 									"type": "Expression"
 								}
 							}
