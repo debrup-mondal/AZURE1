@@ -634,6 +634,10 @@
 				"type": "String"
 			},
 			"movie message": {
+				"type": "String",
+				"defaultValue": "RECOMMENDED MOVIES"
+			},
+			"error message": {
 				"type": "String"
 			}
 		},
