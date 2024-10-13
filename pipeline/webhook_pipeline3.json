@@ -45,7 +45,7 @@
 					"headers": {
 						"Content-type": "application/json"
 					},
-					"url": "https://movievault1.vault.azure.net/secrets/logicAppURL/d3dfd67310d5480ea845f4e8e64088c8?api-version=7.0",
+					"url": "https://movievault1.vault.azure.net/secrets/logicAppURL/d3dfd67310d5480ea845f4e8e64088c8",
 					"body": {
 						"value": "{\n    \"pipeline\": \"test\"\n}",
 						"type": "Expression"
