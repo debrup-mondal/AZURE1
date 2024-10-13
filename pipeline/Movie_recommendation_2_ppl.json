@@ -488,10 +488,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"variableName": "url from vault",
-					"value": {
-						"value": "@activity('success mail').output.value",
-						"type": "Expression"
-					}
+					"value": ""
 				}
 			},
 			{
