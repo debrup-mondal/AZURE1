@@ -402,16 +402,7 @@
 					},
 					"ifFalseActivities": [
 						{
-							"name": "Wait1 for false",
-							"type": "Wait",
-							"dependsOn": [],
-							"userProperties": [],
-							"typeProperties": {
-								"waitTimeInSeconds": 1
-							}
-						},
-						{
-							"name": "email subject_copy1",
+							"name": "failed email subject",
 							"type": "SetVariable",
 							"dependsOn": [],
 							"policy": {
@@ -422,7 +413,7 @@
 							"typeProperties": {
 								"variableName": "email subject",
 								"value": {
-									"value": "@variables('movie message')",
+									"value": "@variables('error message')",
 									"type": "Expression"
 								}
 							}
