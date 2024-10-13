@@ -559,7 +559,7 @@
 						"type": "Expression"
 					},
 					"body": {
-						"value": "{\n    \"pipeline\": \"test\"\n}",
+						"value": "{\n    \"MOVIES\": \"@{activity('MovieML').output}\"\n}",
 						"type": "Expression"
 					}
 				}
