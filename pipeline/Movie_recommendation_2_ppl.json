@@ -409,6 +409,23 @@
 							"typeProperties": {
 								"waitTimeInSeconds": 1
 							}
+						},
+						{
+							"name": "email subject_copy1",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "email subject",
+								"value": {
+									"value": "@variables('movie message')",
+									"type": "Expression"
+								}
+							}
 						}
 					],
 					"ifTrueActivities": [
