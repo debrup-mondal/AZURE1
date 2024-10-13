@@ -519,7 +519,7 @@
 						"Content-type": "application/json"
 					},
 					"url": {
-						"value": "@variables('vari1')",
+						"value": "@variables('url from vault')",
 						"type": "Expression"
 					},
 					"body": {
