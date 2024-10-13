@@ -905,7 +905,13 @@
 						]
 					}
 				],
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@equals()",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"variables": {
