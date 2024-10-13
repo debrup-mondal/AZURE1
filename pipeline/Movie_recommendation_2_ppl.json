@@ -435,7 +435,14 @@
 						{
 							"name": "email subject",
 							"type": "SetVariable",
-							"dependsOn": [],
+							"dependsOn": [
+								{
+									"activity": "MovieML",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
 							"policy": {
 								"secureOutput": false,
 								"secureInput": false
@@ -443,7 +450,10 @@
 							"userProperties": [],
 							"typeProperties": {
 								"variableName": "email subject",
-								"value": ""
+								"value": {
+									"value": "@variables('movie message')",
+									"type": "Expression"
+								}
 							}
 						}
 					]
@@ -583,7 +593,14 @@
 				"type": "WebActivity",
 				"state": "Inactive",
 				"onInactiveMarkAs": "Succeeded",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "url from vault",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
