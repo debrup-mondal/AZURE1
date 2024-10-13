@@ -629,6 +629,12 @@
 			},
 			"url from vault": {
 				"type": "String"
+			},
+			"email subject": {
+				"type": "String"
+			},
+			"movie message": {
+				"type": "String"
 			}
 		},
 		"annotations": []
