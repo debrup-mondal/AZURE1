@@ -81,7 +81,7 @@
 				}
 			},
 			{
-				"name": "Web1",
+				"name": "success mail_copy1_copy1",
 				"type": "WebActivity",
 				"dependsOn": [
 					{
@@ -100,9 +100,18 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"url": {
-						"value": "@variables('vari1')",
+					"method": "GET",
+					"headers": {
+						"Content-type": "application/json"
+					},
+					"url": "",
+					"body": {
+						"value": "{\n    \"pipeline\": \"test\"\n}",
 						"type": "Expression"
+					},
+					"authentication": {
+						"type": "MSI",
+						"resource": "https://vault.azure.net/"
 					}
 				}
 			}
