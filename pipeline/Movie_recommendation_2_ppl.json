@@ -893,6 +893,19 @@
 						"type": "Expression"
 					}
 				}
+			},
+			{
+				"name": "check email subject",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "If Condition1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": []
 			}
 		],
 		"variables": {
