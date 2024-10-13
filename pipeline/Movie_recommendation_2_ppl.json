@@ -471,7 +471,7 @@
 				}
 			},
 			{
-				"name": "Set variable1",
+				"name": "url from vault",
 				"type": "SetVariable",
 				"dependsOn": [
 					{
