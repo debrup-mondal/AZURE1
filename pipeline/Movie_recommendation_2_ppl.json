@@ -908,7 +908,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@equals()",
+						"value": "@equals(variables('email subject'),variables('movie message'))",
 						"type": "Expression"
 					}
 				}
