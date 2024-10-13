@@ -433,14 +433,18 @@
 							}
 						},
 						{
-							"name": "Set variable1",
+							"name": "email subject",
 							"type": "SetVariable",
 							"dependsOn": [],
 							"policy": {
 								"secureOutput": false,
 								"secureInput": false
 							},
-							"userProperties": []
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "email subject",
+								"value": ""
+							}
 						}
 					]
 				}
