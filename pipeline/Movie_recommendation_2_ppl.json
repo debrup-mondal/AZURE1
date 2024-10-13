@@ -478,9 +478,16 @@
 							}
 						},
 						{
-							"name": "success mail_copy1_copy1_copy1_copy1_copy1",
+							"name": "failure mail",
 							"type": "WebActivity",
-							"dependsOn": [],
+							"dependsOn": [
+								{
+									"activity": "url from vault_copy1_copy1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
 							"policy": {
 								"timeout": "0.12:00:00",
 								"retry": 0,
