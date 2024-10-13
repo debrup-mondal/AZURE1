@@ -488,7 +488,10 @@
 				"userProperties": [],
 				"typeProperties": {
 					"variableName": "url from vault",
-					"value": ""
+					"value": {
+						"value": "@activity('logic app and vault connection').output.value",
+						"type": "Expression"
+					}
 				}
 			},
 			{
