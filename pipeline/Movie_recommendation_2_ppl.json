@@ -469,6 +469,30 @@
 						"resource": "https://vault.azure.net/"
 					}
 				}
+			},
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "success mail",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "vari1",
+					"value": {
+						"value": "@activity('success mail_copy1').output.value",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"variables": {
