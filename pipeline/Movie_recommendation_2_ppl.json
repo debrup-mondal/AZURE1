@@ -591,8 +591,6 @@
 			{
 				"name": "success mail_copy1_copy1",
 				"type": "WebActivity",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "url from vault",
@@ -619,7 +617,7 @@
 						"type": "Expression"
 					},
 					"body": {
-						"value": "{\n    \"MOVIES\": \"@{activity('MovieML').output}\"\n}",
+						"value": "{\n    \"SUBJECT\": \"@{variables('email subject')},\n    \"MOVIES\": \"@{activity('MovieML').output}\"\n}",
 						"type": "Expression"
 					}
 				}
