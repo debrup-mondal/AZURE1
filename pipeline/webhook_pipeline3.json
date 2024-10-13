@@ -41,7 +41,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"method": "POST",
+					"method": "GET",
 					"headers": {
 						"Content-type": "application/json"
 					},
