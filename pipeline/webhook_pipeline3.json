@@ -5,6 +5,8 @@
 			{
 				"name": "success mail",
 				"type": "WebActivity",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -20,6 +22,30 @@
 						"Content-type": "application/json"
 					},
 					"url": "https://prod-09.centralindia.logic.azure.com:443/workflows/818af5ec9d3b4f8b82af15c52d932ee4/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=JTCW4aV543T_FXRU6kZZNhahIFYHYHxu4-1oYX9uJHI",
+					"body": {
+						"value": "{\n    \"pipeline\": \"@{pipeline().Pipeline}\"\n}",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "success mail_copy1",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "POST",
+					"headers": {
+						"Content-type": "application/json"
+					},
+					"url": "https://movievault1.vault.azure.net/secrets/logicAppURL/d3dfd67310d5480ea845f4e8e64088c8",
 					"body": {
 						"value": "{\n    \"pipeline\": \"@{pipeline().Pipeline}\"\n}",
 						"type": "Expression"
