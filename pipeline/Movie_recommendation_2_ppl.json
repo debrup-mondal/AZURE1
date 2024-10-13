@@ -571,7 +571,7 @@
 				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
-						"activity": "url from vault",
+						"activity": "If Condition2",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -599,6 +599,19 @@
 						"type": "Expression"
 					}
 				}
+			},
+			{
+				"name": "If Condition2",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "url from vault",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": []
 			}
 		],
 		"variables": {
