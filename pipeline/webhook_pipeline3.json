@@ -49,6 +49,9 @@
 					"body": {
 						"value": "{\n    \"pipeline\": \"@{pipeline().Pipeline}\"\n}",
 						"type": "Expression"
+					},
+					"authentication": {
+						"type": "UserAssignedManagedIdentity"
 					}
 				}
 			}
