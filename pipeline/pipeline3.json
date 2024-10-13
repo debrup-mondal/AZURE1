@@ -11,7 +11,18 @@
 					"expression": {
 						"value": "@equals(1,2 )",
 						"type": "Expression"
-					}
+					},
+					"ifTrueActivities": [
+						{
+							"name": "Wait1",
+							"type": "Wait",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"waitTimeInSeconds": 1
+							}
+						}
+					]
 				}
 			}
 		],
