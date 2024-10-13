@@ -431,6 +431,16 @@
 								"referenceName": "AzureDatabricks",
 								"type": "LinkedServiceReference"
 							}
+						},
+						{
+							"name": "Set variable1",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": []
 						}
 					]
 				}
@@ -638,7 +648,8 @@
 				"defaultValue": "RECOMMENDED MOVIES"
 			},
 			"error message": {
-				"type": "String"
+				"type": "String",
+				"defaultValue": "ERROR HAS OCCURED"
 			}
 		},
 		"annotations": []
