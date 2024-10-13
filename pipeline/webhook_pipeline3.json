@@ -59,14 +59,33 @@
 			{
 				"name": "Set variable1",
 				"type": "SetVariable",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "success mail_copy1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "vari1",
+					"value": {
+						"value": "@activity('success mail_copy1').output.value",
+						"type": "Expression"
+					}
+				}
 			}
 		],
+		"variables": {
+			"vari1": {
+				"type": "String"
+			}
+		},
 		"annotations": []
 	}
 }
