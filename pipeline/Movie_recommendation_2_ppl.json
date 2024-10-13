@@ -571,7 +571,7 @@
 				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
-						"activity": "If Condition2",
+						"activity": "email subject",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -601,7 +601,7 @@
 				}
 			},
 			{
-				"name": "If Condition2",
+				"name": "email subject",
 				"type": "IfCondition",
 				"dependsOn": [
 					{
