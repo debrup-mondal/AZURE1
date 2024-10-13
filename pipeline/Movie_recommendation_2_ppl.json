@@ -467,7 +467,14 @@
 						{
 							"name": "logic app and vault connection_copy1",
 							"type": "WebActivity",
-							"dependsOn": [],
+							"dependsOn": [
+								{
+									"activity": "email subject",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
 							"policy": {
 								"timeout": "0.12:00:00",
 								"retry": 0,
@@ -512,78 +519,6 @@
 								"variableName": "url from vault",
 								"value": {
 									"value": "@activity('logic app and vault connection').output.value",
-									"type": "Expression"
-								}
-							}
-						},
-						{
-							"name": "success mail_copy2",
-							"type": "WebActivity",
-							"state": "Inactive",
-							"onInactiveMarkAs": "Succeeded",
-							"dependsOn": [
-								{
-									"activity": "url from vault_copy1",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
-							"policy": {
-								"timeout": "0.12:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"method": "POST",
-								"headers": {
-									"Content-type": "application/json"
-								},
-								"url": {
-									"value": "@variables('url from vault')",
-									"type": "Expression"
-								},
-								"body": {
-									"value": "{\n    \"pipeline\": \"test\"\n}",
-									"type": "Expression"
-								}
-							}
-						},
-						{
-							"name": "success mail_copy1_copy2",
-							"type": "WebActivity",
-							"state": "Inactive",
-							"onInactiveMarkAs": "Succeeded",
-							"dependsOn": [
-								{
-									"activity": "url from vault_copy1",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
-							"policy": {
-								"timeout": "0.12:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"method": "POST",
-								"headers": {
-									"Content-type": "application/json"
-								},
-								"url": {
-									"value": "@variables('url from vault')",
-									"type": "Expression"
-								},
-								"body": {
-									"value": "{\n    \"MOVIES\": \"@{activity('MovieML').output}\"\n}",
 									"type": "Expression"
 								}
 							}
@@ -662,6 +597,8 @@
 			{
 				"name": "logic app and vault connection",
 				"type": "WebActivity",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "If Condition1",
@@ -697,6 +634,8 @@
 			{
 				"name": "url from vault",
 				"type": "SetVariable",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "logic app and vault connection",
@@ -793,6 +732,8 @@
 			{
 				"name": "success mail_copy1_copy1",
 				"type": "WebActivity",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "url from vault",
@@ -827,6 +768,8 @@
 			{
 				"name": "success mail_copy1_copy1_copy1",
 				"type": "WebActivity",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "success mail_copy1_copy1",
