@@ -556,133 +556,6 @@
 									"type": "Expression"
 								}
 							}
-						},
-						{
-							"name": "logic app and vault connection_copy1",
-							"type": "WebActivity",
-							"dependsOn": [
-								{
-									"activity": "email subject",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
-							"policy": {
-								"timeout": "0.12:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"method": "GET",
-								"headers": {
-									"Content-type": "application/json"
-								},
-								"url": "https://movievault1.vault.azure.net/secrets/logicAppURL/d3dfd67310d5480ea845f4e8e64088c8?api-version=7.0",
-								"body": {
-									"value": "{\n    \"pipeline\": \"test\"\n}",
-									"type": "Expression"
-								},
-								"authentication": {
-									"type": "MSI",
-									"resource": "https://vault.azure.net/"
-								}
-							}
-						},
-						{
-							"name": "url from vault_copy1",
-							"type": "SetVariable",
-							"dependsOn": [
-								{
-									"activity": "logic app and vault connection_copy1",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
-							"policy": {
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"variableName": "url from vault",
-								"value": {
-									"value": "@activity('logic app and vault connection_copy1').output.value",
-									"type": "Expression"
-								}
-							}
-						},
-						{
-							"name": "success mail_copy1_copy1_copy2",
-							"type": "WebActivity",
-							"dependsOn": [
-								{
-									"activity": "url from vault_copy1",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
-							"policy": {
-								"timeout": "0.12:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"method": "POST",
-								"headers": {
-									"Content-type": "application/json"
-								},
-								"url": {
-									"value": "@variables('url from vault')",
-									"type": "Expression"
-								},
-								"body": {
-									"value": "{\n    \"SUBJECT\": \"@{variables('email subject')}\",\n    \"MOVIES\": \"@{activity('MovieML').output}\"\n}",
-									"type": "Expression"
-								}
-							}
-						},
-						{
-							"name": "success mail_copy1_copy1_copy1_copy1",
-							"type": "WebActivity",
-							"dependsOn": [
-								{
-									"activity": "success mail_copy1_copy1_copy2",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
-							"policy": {
-								"timeout": "0.12:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"method": "POST",
-								"headers": {
-									"Content-type": "application/json"
-								},
-								"url": {
-									"value": "@variables('url from vault')",
-									"type": "Expression"
-								},
-								"body": {
-									"value": "{\n    \"EMAIL TO\": \"@{variables('Email to')}\",\n    \"SUBJECT\": \"@{variables('email subject')}\",\n    \"MOVIES\": \"@{activity('MovieML').output}\"\n}",
-									"type": "Expression"
-								}
-							}
 						}
 					]
 				}
@@ -909,6 +782,112 @@
 				"typeProperties": {
 					"expression": {
 						"value": "@equals(variables('email subject'),variables('movie message'))",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "logic app and vault connection_copy1",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "check email subject",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "GET",
+					"headers": {
+						"Content-type": "application/json"
+					},
+					"url": "https://movievault1.vault.azure.net/secrets/logicAppURL/d3dfd67310d5480ea845f4e8e64088c8?api-version=7.0",
+					"body": {
+						"value": "{\n    \"pipeline\": \"test\"\n}",
+						"type": "Expression"
+					},
+					"authentication": {
+						"type": "MSI",
+						"resource": "https://vault.azure.net/"
+					}
+				}
+			},
+			{
+				"name": "url from vault_copy1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "url from vault",
+					"value": {
+						"value": "@activity('logic app and vault connection_copy1').output.value",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "success mail_copy1_copy1_copy2",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "POST",
+					"headers": {
+						"Content-type": "application/json"
+					},
+					"url": {
+						"value": "@variables('url from vault')",
+						"type": "Expression"
+					},
+					"body": {
+						"value": "{\n    \"SUBJECT\": \"@{variables('email subject')}\",\n    \"MOVIES\": \"@{activity('MovieML').output}\"\n}",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "success mail_copy1_copy1_copy1_copy1",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "POST",
+					"headers": {
+						"Content-type": "application/json"
+					},
+					"url": {
+						"value": "@variables('url from vault')",
+						"type": "Expression"
+					},
+					"body": {
+						"value": "{\n    \"EMAIL TO\": \"@{variables('Email to')}\",\n    \"SUBJECT\": \"@{variables('email subject')}\",\n    \"MOVIES\": \"@{activity('MovieML').output}\"\n}",
 						"type": "Expression"
 					}
 				}
