@@ -495,7 +495,7 @@
 				}
 			},
 			{
-				"name": "success mail_copy1_copy1",
+				"name": "success mail",
 				"type": "WebActivity",
 				"dependsOn": [
 					{
