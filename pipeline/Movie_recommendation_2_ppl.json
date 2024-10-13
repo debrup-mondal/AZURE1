@@ -671,6 +671,10 @@
 			"error message": {
 				"type": "String",
 				"defaultValue": "ERROR HAS OCCURED"
+			},
+			"Email to": {
+				"type": "String",
+				"defaultValue": "debrup617@gmail.com"
 			}
 		},
 		"annotations": []
