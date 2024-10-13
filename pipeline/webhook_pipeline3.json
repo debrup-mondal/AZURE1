@@ -51,6 +51,7 @@
 						"type": "Expression"
 					},
 					"authentication": {
+						"resource": "https://vault.azure.net/",
 						"type": "UserAssignedManagedIdentity"
 					}
 				}
