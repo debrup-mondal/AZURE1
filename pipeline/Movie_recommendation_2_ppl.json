@@ -653,7 +653,7 @@
 						"type": "Expression"
 					},
 					"body": {
-						"value": "{\n    \"SUBJECT\": \"@{variables('email subject')},\n    \"MOVIES\": \"@{activity('MovieML').output}\"\n}",
+						"value": "{\n    \"EMAIL TO\": \"@{variables('Email to')}\",\n    \"SUBJECT\": \"@{variables('email subject')}\",\n    \"MOVIES\": \"@{activity('MovieML').output}\"\n}",
 						"type": "Expression"
 					}
 				}
