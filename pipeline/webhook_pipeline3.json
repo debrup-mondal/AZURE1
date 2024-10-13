@@ -51,9 +51,8 @@
 						"type": "Expression"
 					},
 					"authentication": {
-						"type": "ServicePrincipal",
-						"userTenant": "97debd4f-fa35-435f-a7f2-5d1e21fb7498",
-						"resource": "https://vault.azure.net/"
+						"resource": "https://vault.azure.net/",
+						"type": "UserAssignedManagedIdentity"
 					}
 				}
 			}
