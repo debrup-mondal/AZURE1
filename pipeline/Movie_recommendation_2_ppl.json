@@ -487,9 +487,9 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"variableName": "vari1",
+					"variableName": "url from vault",
 					"value": {
-						"value": "@activity('success mail_copy1').output.value",
+						"value": "@activity('success mail').output.value",
 						"type": "Expression"
 					}
 				}
@@ -527,6 +527,9 @@
 			"match_status": {
 				"type": "Boolean",
 				"defaultValue": true
+			},
+			"url from vault": {
+				"type": "String"
 			}
 		},
 		"annotations": []
