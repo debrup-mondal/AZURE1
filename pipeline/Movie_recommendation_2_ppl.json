@@ -569,14 +569,7 @@
 				"type": "WebActivity",
 				"state": "Inactive",
 				"onInactiveMarkAs": "Succeeded",
-				"dependsOn": [
-					{
-						"activity": "email subject",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -599,19 +592,6 @@
 						"type": "Expression"
 					}
 				}
-			},
-			{
-				"name": "email subject",
-				"type": "IfCondition",
-				"dependsOn": [
-					{
-						"activity": "url from vault",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": []
 			}
 		],
 		"variables": {
