@@ -557,6 +557,8 @@
 			{
 				"name": "success mail_copy1",
 				"type": "WebActivity",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "url from vault",
