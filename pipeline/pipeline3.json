@@ -49,7 +49,7 @@
 		],
 		"variables": {
 			"output": {
-				"type": "String"
+				"type": "Boolean"
 			}
 		},
 		"annotations": []
