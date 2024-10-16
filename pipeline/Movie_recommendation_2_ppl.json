@@ -684,7 +684,13 @@
 						"referenceName": "email_pipeline",
 						"type": "PipelineReference"
 					},
-					"waitOnCompletion": true
+					"waitOnCompletion": true,
+					"parameters": {
+						"email_subject": {
+							"value": "@variables('email subject')",
+							"type": "Expression"
+						}
+					}
 				}
 			}
 		],
