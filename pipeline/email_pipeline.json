@@ -9,7 +9,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@equals(variables('email subject'),variables('movie message'))",
+						"value": "@equals(pipeline().parameters.email_subject,pipeline().parameters.movie_message)",
 						"type": "Expression"
 					},
 					"ifFalseActivities": [
@@ -193,6 +193,9 @@
 		],
 		"parameters": {
 			"email_subject": {
+				"type": "string"
+			},
+			"movie_message": {
 				"type": "string"
 			}
 		},
