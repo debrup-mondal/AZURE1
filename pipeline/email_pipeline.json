@@ -191,6 +191,11 @@
 				}
 			}
 		],
+		"parameters": {
+			"email_subject": {
+				"type": "string"
+			}
+		},
 		"annotations": []
 	}
 }
