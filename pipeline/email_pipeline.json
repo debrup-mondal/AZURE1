@@ -182,7 +182,7 @@
 									"type": "Expression"
 								},
 								"body": {
-									"value": "{\n    \"EMAIL TO\": \"@{variables('Email to')}\",\n    \"SUBJECT\": \"@{variables('email subject')}\"\n}",
+									"value": "{\n    \"EMAIL TO\": \"@{pipeline().parameters.Email_to}\",\n    \"SUBJECT\": \"@{pipeline().parameters.email_subject}\"\n}",
 									"type": "Expression"
 								}
 							}
