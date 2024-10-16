@@ -199,6 +199,11 @@
 				"type": "string"
 			}
 		},
+		"variables": {
+			"url from vault": {
+				"type": "String"
+			}
+		},
 		"annotations": []
 	}
 }
