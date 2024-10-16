@@ -689,6 +689,14 @@
 						"email_subject": {
 							"value": "@variables('email subject')",
 							"type": "Expression"
+						},
+						"movie_message": {
+							"value": "@variables('movie message')",
+							"type": "Expression"
+						},
+						"Email_to": {
+							"value": "@variables('Email to')",
+							"type": "Expression"
 						}
 					}
 				}
