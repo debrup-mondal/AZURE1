@@ -197,6 +197,9 @@
 			},
 			"movie_message": {
 				"type": "string"
+			},
+			"Email_to": {
+				"type": "string"
 			}
 		},
 		"variables": {
