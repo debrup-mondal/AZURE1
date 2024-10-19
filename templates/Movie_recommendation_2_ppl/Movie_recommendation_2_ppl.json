@@ -1,0 +1,1278 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name"
+		},
+		"AzureDatabricks": {
+			"type": "string"
+		},
+		"ls1": {
+			"type": "string"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/Movie_recommendation_2_ppl')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "get file names",
+						"type": "GetMetadata",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "input_file_names",
+								"type": "DatasetReference",
+								"parameters": {
+									"container_name": {
+										"value": "@variables('container_name')",
+										"type": "Expression"
+									},
+									"folder_name": {
+										"value": "@variables('folder_name')",
+										"type": "Expression"
+									}
+								}
+							},
+							"fieldList": [
+								"childItems"
+							],
+							"storeSettings": {
+								"type": "AzureBlobStorageReadSettings",
+								"recursive": true,
+								"enablePartitionDiscovery": false
+							},
+							"formatSettings": {
+								"type": "DelimitedTextReadSettings"
+							}
+						}
+					},
+					{
+						"name": "input file name",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "get file names",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('get file names').output.childItems",
+								"type": "Expression"
+							},
+							"isSequential": true,
+							"activities": [
+								{
+									"name": "filename",
+									"type": "SetVariable",
+									"dependsOn": [],
+									"policy": {
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "name",
+										"value": {
+											"value": "@item().name",
+											"type": "Expression"
+										}
+									}
+								},
+								{
+									"name": "schema file name",
+									"type": "SetVariable",
+									"dependsOn": [
+										{
+											"activity": "filename",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "schema_filename",
+										"value": {
+											"value": "@concat(substring(variables('name'), 0, add(length(variables('name')), -4)), '_schema.csv')\n",
+											"type": "Expression"
+										}
+									}
+								},
+								{
+									"name": "input file structure",
+									"type": "GetMetadata",
+									"dependsOn": [
+										{
+											"activity": "schema file name",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"dataset": {
+											"referenceName": "input_file_structure_dataset",
+											"type": "DatasetReference",
+											"parameters": {
+												"filename": {
+													"value": "@variables('name')",
+													"type": "Expression"
+												},
+												"directory": {
+													"value": "@variables('folder_name')",
+													"type": "Expression"
+												},
+												"container": {
+													"value": "@variables('container_name')",
+													"type": "Expression"
+												}
+											}
+										},
+										"fieldList": [
+											"structure"
+										],
+										"storeSettings": {
+											"type": "AzureBlobStorageReadSettings",
+											"recursive": true,
+											"enablePartitionDiscovery": false
+										},
+										"formatSettings": {
+											"type": "DelimitedTextReadSettings"
+										}
+									}
+								},
+								{
+									"name": "schema file structure",
+									"type": "GetMetadata",
+									"dependsOn": [
+										{
+											"activity": "schema file name",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"dataset": {
+											"referenceName": "schema_file_structure_dataset",
+											"type": "DatasetReference",
+											"parameters": {
+												"filename": {
+													"value": "@variables('schema_filename')",
+													"type": "Expression"
+												},
+												"directory": {
+													"value": "@variables('schema_folder_name')",
+													"type": "Expression"
+												},
+												"container": {
+													"value": "@variables('schema_container_name')",
+													"type": "Expression"
+												}
+											}
+										},
+										"fieldList": [
+											"structure"
+										],
+										"storeSettings": {
+											"type": "AzureBlobStorageReadSettings",
+											"recursive": true,
+											"enablePartitionDiscovery": false
+										},
+										"formatSettings": {
+											"type": "DelimitedTextReadSettings"
+										}
+									}
+								},
+								{
+									"name": "schema match check",
+									"type": "IfCondition",
+									"dependsOn": [
+										{
+											"activity": "input file structure",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										},
+										{
+											"activity": "schema file structure",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"userProperties": [],
+									"typeProperties": {
+										"expression": {
+											"value": "@equals(activity('input file structure').output.structure, activity('schema file structure').output.structure)",
+											"type": "Expression"
+										},
+										"ifFalseActivities": [
+											{
+												"name": "Copy unmatched files",
+												"type": "Copy",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "0.12:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "DelimitedTextSource",
+														"storeSettings": {
+															"type": "AzureBlobStorageReadSettings",
+															"recursive": true,
+															"enablePartitionDiscovery": false
+														},
+														"formatSettings": {
+															"type": "DelimitedTextReadSettings"
+														}
+													},
+													"sink": {
+														"type": "DelimitedTextSink",
+														"storeSettings": {
+															"type": "AzureBlobStorageWriteSettings"
+														},
+														"formatSettings": {
+															"type": "DelimitedTextWriteSettings",
+															"quoteAllText": true,
+															"fileExtension": ".txt"
+														}
+													},
+													"enableStaging": false,
+													"translator": {
+														"type": "TabularTranslator",
+														"typeConversion": true,
+														"typeConversionSettings": {
+															"allowDataTruncation": true,
+															"treatBooleanAsNumber": false
+														}
+													}
+												},
+												"inputs": [
+													{
+														"referenceName": "unmatched_source_files_dataset",
+														"type": "DatasetReference",
+														"parameters": {
+															"filename": {
+																"value": "@variables('name')",
+																"type": "Expression"
+															}
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "unmatched_sink_files_dataset",
+														"type": "DatasetReference"
+													}
+												]
+											},
+											{
+												"name": "failed match status",
+												"type": "SetVariable",
+												"dependsOn": [
+													{
+														"activity": "Copy unmatched files",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"variableName": "match_status",
+													"value": false
+												}
+											}
+										],
+										"ifTrueActivities": [
+											{
+												"name": "Copy matched files",
+												"type": "Copy",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "0.12:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "DelimitedTextSource",
+														"storeSettings": {
+															"type": "AzureBlobStorageReadSettings",
+															"recursive": true,
+															"enablePartitionDiscovery": false
+														},
+														"formatSettings": {
+															"type": "DelimitedTextReadSettings"
+														}
+													},
+													"sink": {
+														"type": "DelimitedTextSink",
+														"storeSettings": {
+															"type": "AzureBlobStorageWriteSettings"
+														},
+														"formatSettings": {
+															"type": "DelimitedTextWriteSettings",
+															"quoteAllText": true,
+															"fileExtension": ".txt"
+														}
+													},
+													"enableStaging": false,
+													"translator": {
+														"type": "TabularTranslator",
+														"typeConversion": true,
+														"typeConversionSettings": {
+															"allowDataTruncation": true,
+															"treatBooleanAsNumber": false
+														}
+													}
+												},
+												"inputs": [
+													{
+														"referenceName": "matched_files_source_dataset",
+														"type": "DatasetReference",
+														"parameters": {
+															"filename": {
+																"value": "@variables('name')",
+																"type": "Expression"
+															}
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "matched_files_sink_dataset",
+														"type": "DatasetReference"
+													}
+												]
+											}
+										]
+									}
+								}
+							]
+						}
+					},
+					{
+						"name": "If Condition1",
+						"type": "IfCondition",
+						"dependsOn": [
+							{
+								"activity": "input file name",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"expression": {
+								"value": "@equals(variables('match_status'), true)",
+								"type": "Expression"
+							},
+							"ifFalseActivities": [
+								{
+									"name": "failed email subject",
+									"type": "SetVariable",
+									"dependsOn": [],
+									"policy": {
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "email subject",
+										"value": {
+											"value": "@variables('error message')",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"ifTrueActivities": [
+								{
+									"name": "MovieML",
+									"type": "DatabricksNotebook",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"notebookPath": "/Users/debrup617@gmail.com/test Notebook"
+									},
+									"linkedServiceName": {
+										"referenceName": "[parameters('AzureDatabricks')]",
+										"type": "LinkedServiceReference"
+									}
+								},
+								{
+									"name": "email subject",
+									"type": "SetVariable",
+									"dependsOn": [
+										{
+											"activity": "MovieML",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "email subject",
+										"value": {
+											"value": "@variables('movie message')",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					},
+					{
+						"name": "check email subject",
+						"type": "IfCondition",
+						"state": "Inactive",
+						"onInactiveMarkAs": "Succeeded",
+						"dependsOn": [
+							{
+								"activity": "If Condition1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"expression": {
+								"value": "@equals(variables('email subject'),variables('movie message'))",
+								"type": "Expression"
+							},
+							"ifFalseActivities": [
+								{
+									"name": "logic app and vault connection_copy1_copy1",
+									"type": "WebActivity",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"method": "GET",
+										"headers": {
+											"Content-type": "application/json"
+										},
+										"url": "https://movievault1.vault.azure.net/secrets/logicAppURL/d3dfd67310d5480ea845f4e8e64088c8?api-version=7.0",
+										"body": {
+											"value": "{\n    \"pipeline\": \"test\"\n}",
+											"type": "Expression"
+										},
+										"authentication": {
+											"type": "MSI",
+											"resource": "https://vault.azure.net/"
+										}
+									}
+								},
+								{
+									"name": "url from vault_copy1_copy1",
+									"type": "SetVariable",
+									"dependsOn": [
+										{
+											"activity": "logic app and vault connection_copy1_copy1",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "url from vault",
+										"value": {
+											"value": "@activity('logic app and vault connection_copy1_copy1').output.value",
+											"type": "Expression"
+										}
+									}
+								},
+								{
+									"name": "failure mail",
+									"type": "WebActivity",
+									"dependsOn": [
+										{
+											"activity": "url from vault_copy1_copy1",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"method": "POST",
+										"headers": {
+											"Content-type": "application/json"
+										},
+										"url": {
+											"value": "@variables('url from vault')",
+											"type": "Expression"
+										},
+										"body": {
+											"value": "{\n    \"EMAIL TO\": \"@{variables('Email to')}\",\n    \"SUBJECT\": \"@{variables('email subject')}\",\n    \"ADF NAME\": \"@{pipeline().DataFactory}\",\n    \"PIPELINE\": \"@{pipeline().Pipeline}\"\n}",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"ifTrueActivities": [
+								{
+									"name": "logic app and vault connection_copy1",
+									"type": "WebActivity",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"method": "GET",
+										"headers": {
+											"Content-type": "application/json"
+										},
+										"url": "https://movievault1.vault.azure.net/secrets/logicAppURL/d3dfd67310d5480ea845f4e8e64088c8?api-version=7.0",
+										"body": {
+											"value": "{\n    \"pipeline\": \"test\"\n}",
+											"type": "Expression"
+										},
+										"authentication": {
+											"type": "MSI",
+											"resource": "https://vault.azure.net/"
+										}
+									}
+								},
+								{
+									"name": "url from vault_copy1",
+									"type": "SetVariable",
+									"dependsOn": [
+										{
+											"activity": "logic app and vault connection_copy1",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "url from vault",
+										"value": {
+											"value": "@activity('logic app and vault connection_copy1').output.value",
+											"type": "Expression"
+										}
+									}
+								},
+								{
+									"name": "success mail_copy1_copy1_copy1_copy1",
+									"type": "WebActivity",
+									"dependsOn": [
+										{
+											"activity": "url from vault_copy1",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"method": "POST",
+										"headers": {
+											"Content-type": "application/json"
+										},
+										"url": {
+											"value": "@variables('url from vault')",
+											"type": "Expression"
+										},
+										"body": {
+											"value": "{\n    \"EMAIL TO\": \"@{variables('Email to')}\",\n    \"SUBJECT\": \"@{variables('email subject')}\"\n}",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					},
+					{
+						"name": "Execute Pipeline1",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "If Condition1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "email_pipeline",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {
+								"email_subject": {
+									"value": "@variables('email subject')",
+									"type": "Expression"
+								},
+								"movie_message": {
+									"value": "@variables('movie message')",
+									"type": "Expression"
+								},
+								"Email_to": {
+									"value": "@variables('Email to')",
+									"type": "Expression"
+								}
+							}
+						}
+					}
+				],
+				"variables": {
+					"container_name": {
+						"type": "String",
+						"defaultValue": "rawdata"
+					},
+					"folder_name": {
+						"type": "String",
+						"defaultValue": "Movie"
+					},
+					"name": {
+						"type": "String"
+					},
+					"schema_name": {
+						"type": "String"
+					},
+					"char_length": {
+						"type": "Integer"
+					},
+					"schema_filename": {
+						"type": "String"
+					},
+					"schema_container_name": {
+						"type": "String",
+						"defaultValue": "refschema"
+					},
+					"schema_folder_name": {
+						"type": "String",
+						"defaultValue": "SCHEMA"
+					},
+					"match_status": {
+						"type": "Boolean",
+						"defaultValue": true
+					},
+					"url from vault": {
+						"type": "String"
+					},
+					"email subject": {
+						"type": "String"
+					},
+					"movie message": {
+						"type": "String",
+						"defaultValue": "RECOMMENDED MOVIES"
+					},
+					"error message": {
+						"type": "String",
+						"defaultValue": "ERROR HAS OCCURED"
+					},
+					"Email to": {
+						"type": "String",
+						"defaultValue": "debrup617@gmail.com"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/input_file_names')]",
+				"[concat(variables('factoryId'), '/pipelines/email_pipeline')]",
+				"[concat(variables('factoryId'), '/datasets/input_file_structure_dataset')]",
+				"[concat(variables('factoryId'), '/datasets/schema_file_structure_dataset')]",
+				"[concat(variables('factoryId'), '/datasets/unmatched_source_files_dataset')]",
+				"[concat(variables('factoryId'), '/datasets/unmatched_sink_files_dataset')]",
+				"[concat(variables('factoryId'), '/datasets/matched_files_source_dataset')]",
+				"[concat(variables('factoryId'), '/datasets/matched_files_sink_dataset')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/input_file_names')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "[parameters('ls1')]",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"container_name": {
+						"type": "string"
+					},
+					"folder_name": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": {
+							"value": "@dataset().folder_name",
+							"type": "Expression"
+						},
+						"container": {
+							"value": "@dataset().container_name",
+							"type": "Expression"
+						}
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/email_pipeline')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "check email subject",
+						"type": "IfCondition",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"expression": {
+								"value": "@equals(pipeline().parameters.email_subject,pipeline().parameters.movie_message)",
+								"type": "Expression"
+							},
+							"ifFalseActivities": [
+								{
+									"name": "logic app and vault connection_copy1_copy1",
+									"type": "WebActivity",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"method": "GET",
+										"headers": {
+											"Content-type": "application/json"
+										},
+										"url": "https://movievault1.vault.azure.net/secrets/logicAppURL/d3dfd67310d5480ea845f4e8e64088c8?api-version=7.0",
+										"body": {
+											"value": "{\n    \"pipeline\": \"test\"\n}",
+											"type": "Expression"
+										},
+										"authentication": {
+											"type": "MSI",
+											"resource": "https://vault.azure.net/"
+										}
+									}
+								},
+								{
+									"name": "url from vault_copy1_copy1",
+									"type": "SetVariable",
+									"dependsOn": [
+										{
+											"activity": "logic app and vault connection_copy1_copy1",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "url from vault",
+										"value": {
+											"value": "@activity('logic app and vault connection_copy1_copy1').output.value",
+											"type": "Expression"
+										}
+									}
+								},
+								{
+									"name": "failure mail",
+									"type": "WebActivity",
+									"dependsOn": [
+										{
+											"activity": "url from vault_copy1_copy1",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"method": "POST",
+										"headers": {
+											"Content-type": "application/json"
+										},
+										"url": {
+											"value": "@variables('url from vault')",
+											"type": "Expression"
+										},
+										"body": {
+											"value": "{\n    \"EMAIL TO\": \"@{variables('Email to')}\",\n    \"SUBJECT\": \"@{variables('email subject')}\",\n    \"ADF NAME\": \"@{pipeline().DataFactory}\",\n    \"PIPELINE\": \"@{pipeline().Pipeline}\"\n}",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"ifTrueActivities": [
+								{
+									"name": "logic app and vault connection_copy1",
+									"type": "WebActivity",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"method": "GET",
+										"headers": {
+											"Content-type": "application/json"
+										},
+										"url": "https://movievault1.vault.azure.net/secrets/logicAppURL/d3dfd67310d5480ea845f4e8e64088c8?api-version=7.0",
+										"body": {
+											"value": "{\n    \"pipeline\": \"test\"\n}",
+											"type": "Expression"
+										},
+										"authentication": {
+											"type": "MSI",
+											"resource": "https://vault.azure.net/"
+										}
+									}
+								},
+								{
+									"name": "url from vault_copy1",
+									"type": "SetVariable",
+									"dependsOn": [
+										{
+											"activity": "logic app and vault connection_copy1",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "url from vault",
+										"value": {
+											"value": "@activity('logic app and vault connection_copy1').output.value",
+											"type": "Expression"
+										}
+									}
+								},
+								{
+									"name": "success mail_copy1_copy1_copy1_copy1",
+									"type": "WebActivity",
+									"dependsOn": [
+										{
+											"activity": "url from vault_copy1",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"method": "POST",
+										"headers": {
+											"Content-type": "application/json"
+										},
+										"url": {
+											"value": "@variables('url from vault')",
+											"type": "Expression"
+										},
+										"body": {
+											"value": "{\n    \"EMAIL TO\": \"@{pipeline().parameters.Email_to}\",\n    \"SUBJECT\": \"@{pipeline().parameters.email_subject}\"\n}",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					}
+				],
+				"parameters": {
+					"email_subject": {
+						"type": "string"
+					},
+					"movie_message": {
+						"type": "string"
+					},
+					"Email_to": {
+						"type": "string"
+					}
+				},
+				"variables": {
+					"url from vault": {
+						"type": "String"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/input_file_structure_dataset')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "[parameters('ls1')]",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"filename": {
+						"type": "string"
+					},
+					"directory": {
+						"type": "string"
+					},
+					"container": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": {
+							"value": "@dataset().filename",
+							"type": "Expression"
+						},
+						"folderPath": {
+							"value": "@dataset().directory",
+							"type": "Expression"
+						},
+						"container": {
+							"value": "@dataset().container",
+							"type": "Expression"
+						}
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/schema_file_structure_dataset')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "[parameters('ls1')]",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"filename": {
+						"type": "string"
+					},
+					"directory": {
+						"type": "string"
+					},
+					"container": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": {
+							"value": "@dataset().filename",
+							"type": "Expression"
+						},
+						"folderPath": {
+							"value": "@dataset().directory",
+							"type": "Expression"
+						},
+						"container": {
+							"value": "@dataset().container",
+							"type": "Expression"
+						}
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/unmatched_source_files_dataset')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "[parameters('ls1')]",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"filename": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": {
+							"value": "@dataset().filename",
+							"type": "Expression"
+						},
+						"folderPath": "Movie",
+						"container": "rawdata"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "movieId",
+						"type": "String"
+					},
+					{
+						"name": "title",
+						"type": "String"
+					},
+					{
+						"name": "genres",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/unmatched_sink_files_dataset')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "[parameters('ls1')]",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "Data",
+						"container": "rejected"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/matched_files_source_dataset')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "[parameters('ls1')]",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"filename": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": {
+							"value": "@dataset().filename",
+							"type": "Expression"
+						},
+						"folderPath": "Movie",
+						"container": "rawdata"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/matched_files_sink_dataset')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "[parameters('ls1')]",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "Data",
+						"container": "validated"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		}
+	]
+}
